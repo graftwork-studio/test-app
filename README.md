@@ -5,7 +5,7 @@ The canary for the Graftwork design system, created from [`app-template`](https:
 ## What's set up
 
 - **Next.js** (App Router) with strict TypeScript.
-- **Components:** `@graftwork/ui`, with its stylesheet and Noto Sans, imported in `app/globals.css`.
+- **Components:** `@graftwork/ui`, with its stylesheet and Geist, imported in `app/globals.css`.
 - **Theme toggle:** in the header. Light, dark and high contrast follow the operating system until the user chooses.
 - **Sample page:** `app/page.tsx`, which uses every component.
 - **Checks on every pull request:** lint (including `jsx-a11y` and the design-system rules), build, type-check, Playwright journeys with axe, and visual snapshots at 320, 768 and 1280px in every theme.
