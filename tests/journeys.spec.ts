@@ -90,3 +90,33 @@ test("skip link moves focus to the main content", async ({ page }) => {
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
 });
+
+for (const theme of THEMES) {
+  test(`chat page has no axe violations in ${theme.name}`, async ({ page }) => {
+    await openInTheme(page, "/chat", theme);
+    await expectNoAxeViolations(page);
+  });
+}
+
+test("chat: a suggestion fills the message and enables Send", async ({ page }) => {
+  await page.goto("/chat");
+  const send = page.getByRole("button", { name: "Send message" });
+  await expect(send).toBeDisabled();
+  await page.getByRole("button", { name: "Review our pricing page" }).click();
+  const message = page.getByRole("textbox", { name: "Message" });
+  await expect(message).toHaveValue("Review our pricing page");
+  await expect(message).toBeFocused();
+  await expect(send).toBeEnabled();
+  await send.click();
+  await expect(message).toHaveValue("");
+});
+
+test("chat: the sidebar can be hidden and shown again", async ({ page }) => {
+  await page.goto("/chat");
+  const sidebar = page.getByRole("complementary", { name: "Chats" });
+  await expect(sidebar).toBeVisible();
+  await page.getByRole("button", { name: "Hide sidebar" }).click();
+  await expect(sidebar).toBeHidden();
+  await page.getByRole("button", { name: "Show sidebar" }).click();
+  await expect(sidebar).toBeVisible();
+});
