@@ -9,7 +9,7 @@ The canary for the Graftwork design system, created from [`app-template`](https:
 - **Theme toggle:** in the header. Light, dark and high contrast follow the operating system until the user chooses.
 - **Sample page:** `app/page.tsx`, which uses every component.
 - **Checks on every pull request:** lint (including `jsx-a11y` and the design-system rules), build, type-check, Playwright journeys with axe, and visual snapshots at 320, 768 and 1280px in every theme.
-- **Renovate:** extends the shared preset from the design system. Design-system releases arrive as one pull request, and minor and patch updates merge themselves when checks pass.
+- **Renovate:** extends the shared preset from the design system. Design-system releases arrive as one pull request, and minor and patch updates merge themselves when checks pass. On that pull request, a workflow refreshes the visual snapshots, because design-system visual changes are reviewed in the design-system repo. The refreshed images are attached to the run for anyone who wants to look.
 - **`CLAUDE.md`:** the rules for building with the design system.
 
 ## After creating a repository from this template
