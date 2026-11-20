@@ -1,0 +1,11 @@
+# pnpm settings for this app.
+
+# pnpm refuses packages released in the last day. Our own design-system
+# packages are published with provenance from graftwork-studio/design-system,
+# and Renovate must be able to install a release straight away.
+minimumReleaseAgeExclude:
+  - "@graftwork/*"
+
+# Install scripts stay off unless a package needs one.
+allowBuilds:
+  esbuild: false

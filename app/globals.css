@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@graftwork/ui/styles.css";
+
+/* Lets Tailwind see the classes used inside @graftwork/ui. */
+@source "../node_modules/@graftwork/ui/dist";
