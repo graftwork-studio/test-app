@@ -4,8 +4,8 @@ import { expectNoAxeViolations, openInTheme, THEMES } from "./helpers";
 // Key journeys on the sample page. Replace these with your app's own journeys.
 
 // An unstyled page passes axe (black on white is high contrast), so check the
-// design-system stylesheet and Noto Sans really loaded.
-test("the design-system stylesheet and Noto Sans are loaded", async ({ page }) => {
+// design-system stylesheet and Geist really loaded.
+test("the design-system stylesheet and Geist are loaded", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
@@ -15,14 +15,14 @@ test("the design-system stylesheet and Noto Sans are loaded", async ({ page }) =
       surfaceToken: html.getPropertyValue("--gw-color-surface-default").trim(),
       background: getComputedStyle(document.body).backgroundColor,
       fontFamily: getComputedStyle(document.body).fontFamily,
-      notoLoaded: document.fonts.check('1rem "Noto Sans Variable"'),
+      geistLoaded: document.fonts.check('1rem "Geist Variable"'),
       buttonRadius: getComputedStyle(document.querySelector('[data-slot="button"]') as Element).borderRadius,
     };
   });
   expect(styles.surfaceToken).not.toBe("");
   expect(styles.background).toBe("rgb(255, 255, 255)");
-  expect(styles.fontFamily).toContain("Noto Sans Variable");
-  expect(styles.notoLoaded).toBe(true);
+  expect(styles.fontFamily).toContain("Geist Variable");
+  expect(styles.geistLoaded).toBe(true);
   expect(styles.buttonRadius).toBe("6px");
 });
 
