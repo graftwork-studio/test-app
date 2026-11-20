@@ -1,6 +1,6 @@
-# Graftwork app template
+# Graftwork test app
 
-A starting point for Graftwork apps. Create a new repository from this template on GitHub, then replace the sample page with your app's first screen.
+The canary for the Graftwork design system, created from [`app-template`](https://github.com/graftwork-studio/app-template). Renovate brings each design-system release here with no delay, and the release merges itself once every check passes. Real apps use the same setup with a 3-day delay.
 
 ## What's set up
 
