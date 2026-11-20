@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { themeScript } from "@graftwork/ui";
-import { SiteHeader } from "./site-header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,10 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main" className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8">
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   );
