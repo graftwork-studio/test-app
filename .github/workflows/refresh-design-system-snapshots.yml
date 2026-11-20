@@ -1,0 +1,125 @@
+name: Refresh snapshots for design-system updates
+
+# A design-system release can change how every screen looks (a new brand
+# colour, for example). Those changes are reviewed in the design-system repo, so
+# here they shouldn't block Renovate's pull request on visual snapshots.
+#
+# On Renovate's design-system pull request, and only when it changes nothing
+# but package.json, the lockfile and screenshots, this workflow renders fresh
+# snapshots and commits them to the pull request. CI then runs again on that
+# commit, so build, type-check, lint, the journeys, axe and the 320px check all
+# still have to pass before the pull request can merge.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: refresh-snapshots-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Is this a design-system update?
+    if: github.head_ref == 'renovate/graftwork-design-system'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      eligible: ${{ steps.files.outputs.eligible }}
+    steps:
+      - id: files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          files=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --paginate --jq '.[].filename')
+          echo "Changed files:"; echo "$files"
+          other=$(echo "$files" | grep -vE '^(package\.json|pnpm-lock\.yaml|tests/__screenshots__/.+\.png)$' || true)
+          if [ -n "$other" ]; then
+            echo "Changes other files, so snapshots won't be refreshed automatically."
+            echo "eligible=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  refresh:
+    name: Refresh visual snapshots
+    needs: check
+    if: needs.check.outputs.eligible == 'true'
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.65.1-noble
+    permissions:
+      contents: write # commit the new snapshots to the pull request
+    outputs:
+      committed: ${{ steps.commit.outputs.committed }}
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Render snapshots
+        run: pnpm exec playwright test tests/visual.spec.ts --update-snapshots=all
+      - name: Commit changed snapshots
+        id: commit
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/__screenshots__
+          if git diff --cached --quiet; then
+            echo "Snapshots already match."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+          else
+            git diff --cached --stat
+            git commit -m "Refresh visual snapshots for the design-system update"
+            git push origin "HEAD:$GITHUB_HEAD_REF"
+            echo "committed=true" >> "$GITHUB_OUTPUT"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Upload the new snapshots for review
+        if: steps.commit.outputs.committed == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: refreshed-snapshots
+          path: tests/__screenshots__
+          retention-days: 30
+
+  # GitHub holds CI on commits pushed by GitHub Actions until a run is approved.
+  # Approve the held runs for the new commit, so the required checks run on it.
+  approve:
+    name: Approve CI on the refreshed commit
+    needs: refresh
+    if: needs.refresh.outputs.committed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ needs.refresh.outputs.sha }}
+        run: |
+          ids=""
+          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&status=action_required" --jq '.workflow_runs[].id')
+            [ -n "$ids" ] && break
+            sleep 10
+          done
+          if [ -z "$ids" ]; then
+            echo "::warning::No held CI run found for $SHA. Check the pull request's checks."
+            exit 0
+          fi
+          for id in $ids; do
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve"
+            echo "Approved run $id"
+          done

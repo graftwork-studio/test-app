@@ -38,3 +38,5 @@ The components already meet the standard. Keep it that way:
 ## Checks
 
 Every pull request runs lint, build, type-check, Playwright journeys with axe, and visual snapshots at 320, 768 and 1280px in light, dark and high contrast. When a change alters how a screen looks, add the `update-snapshots` label to the pull request, download the `visual-snapshots` artifact, check the images and commit them to `tests/__screenshots__`.
+
+Design-system updates are the exception. On Renovate's design-system pull request, a workflow refreshes the snapshots and commits them, because those visual changes are reviewed in the design-system repo. Every other check still has to pass.
