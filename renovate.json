@@ -1,5 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "test-app is the canary: design-system releases arrive with no delay.",
-  "extends": ["github>graftwork-studio/design-system//renovate/canary"]
+  "description": "test-app is the canary: design-system releases arrive after 1 hour, days before other apps.",
+  "extends": [
+    "github>graftwork-studio/design-system//renovate/canary"
+  ]
 }

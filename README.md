@@ -1,6 +1,6 @@
 # Graftwork test app
 
-The canary for the Graftwork design system, created from [`app-template`](https://github.com/graftwork-studio/app-template). Renovate brings each design-system release here with no delay, and the release merges itself once every check passes. Real apps use the same setup with a 3-day delay.
+The canary for the Graftwork design system, created from [`app-template`](https://github.com/graftwork-studio/app-template). Renovate brings each design-system release here an hour after it's published, and the release merges itself once every check passes. Real apps use the same setup with a 3-day delay.
 
 ## What's set up
 
