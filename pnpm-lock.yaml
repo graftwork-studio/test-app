@@ -176,8 +176,8 @@ importers:
   .:
     dependencies:
       '@graftwork/ui':
-        specifier: 1.0.1
-        version: 1.0.1(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)
+        specifier: 1.1.0
+        version: 1.1.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)
       next:
         specifier: 16.4.6
         version: 16.4.6(@babel/core@7.29.13(supports-color@7.2.0))(@playwright/test@1.65.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -363,11 +363,11 @@ packages:
   '@fontsource-variable/noto-sans@5.3.0':
     resolution: {integrity: sha512-e3ZuxzY9AL2psXPZlhwhnYrHUHv6PMoyK9MQ7croF0CUgURLqu9EMjW7q2FgVLwij1tjLsIHQrnwQ8aUcg4BiA==}
 
-  '@graftwork/tokens@1.0.1':
-    resolution: {integrity: sha512-EZDGM2goYEOGZKqJ7U6WSr1DSCIh9+BytMwmcvBynOJKa3A2b93PSNkCRpw+bfZohExwnitdaxCDBYL7Qmr5Gw==}
+  '@graftwork/tokens@1.1.0':
+    resolution: {integrity: sha512-de9Ocl0JO1E/oiTN5+JBvFV7J/UKEkCaWquHxLM1VCsrXtUWgVMvUWZiNh4S2PuWzO7t8tbnP9oYYqsX3al4bA==}
 
-  '@graftwork/ui@1.0.1':
-    resolution: {integrity: sha512-YXmF0nJX0Fl/tCceeskVyOFgluT0MKTnW7qyKOLssd41pv8wXglI38GBXNhs8cYfNhjkskvMcziF2zxKjqL4NQ==}
+  '@graftwork/ui@1.1.0':
+    resolution: {integrity: sha512-TmS1ZQ1qNnRe0jWB5xuaUhRH4FyRnfsKVa+Bsg9WIlSLMo5m4wy0AZjS+yO+BJb16IitX64aZ0orXf81MazoSg==}
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
@@ -2297,12 +2297,12 @@ snapshots:
 
   '@fontsource-variable/noto-sans@5.3.0': {}
 
-  '@graftwork/tokens@1.0.1': {}
+  '@graftwork/tokens@1.1.0': {}
 
-  '@graftwork/ui@1.0.1(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)':
+  '@graftwork/ui@1.1.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)':
     dependencies:
       '@fontsource-variable/noto-sans': 5.3.0
-      '@graftwork/tokens': 1.0.1
+      '@graftwork/tokens': 1.1.0
       class-variance-authority: 0.7.1
       cn: 0.5.2
       lucide-react: 1.74.0(@types/react@19.3.0)(react@19.3.1)
