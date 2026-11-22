@@ -23,7 +23,7 @@ test("the design-system stylesheet and Geist are loaded", async ({ page }) => {
   expect(styles.background).toBe("rgb(255, 255, 255)");
   expect(styles.fontFamily).toContain("Geist Variable");
   expect(styles.geistLoaded).toBe(true);
-  expect(styles.buttonRadius).toBe("6px");
+  expect(styles.buttonRadius).toBe("10px");
 });
 
 for (const theme of THEMES) {
