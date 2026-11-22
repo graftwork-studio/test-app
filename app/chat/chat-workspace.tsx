@@ -45,7 +45,7 @@ const SUGGESTIONS = [
   "Summarise this week's incidents",
 ] as const;
 
-/** Square icon-only buttons. The label is for screen readers; Button keeps a 44px hit area. */
+/** Square icon-only buttons. The label is for screen readers; Button keeps at least a 24px hit area. */
 function IconButton({
   label,
   variant = "ghost",

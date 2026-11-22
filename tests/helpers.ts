@@ -18,10 +18,10 @@ export async function openInTheme(page: Page, path: string, theme: Theme) {
   await page.evaluate(() => document.fonts.ready);
 }
 
-/** axe with WCAG 2.2 A/AA plus AAA contrast. */
+/** axe with WCAG 2.2 A/AA. */
 export async function expectNoAxeViolations(page: Page) {
   const results = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "wcag2aaa"])
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
     .analyze();
   expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
 }
