@@ -1,11 +1,14 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@graftwork/ui";
+import { ComponentShowcase } from "@graftwork/ui/showcase";
 import { NewProjectForm } from "./new-project-form";
 import { ProjectsTable } from "./projects-table";
 import { SignupsChart } from "./signups-chart";
 
 /**
  * The sample page. It uses every @graftwork/ui component, styled only with
- * semantic tokens. Replace it with your app's first real screen.
+ * semantic tokens. ComponentShowcase comes from the package, so new components
+ * appear here when @graftwork/ui updates. ThemeToggle and BarChart are left out
+ * because this page already shows them. Replace it with your app's first real screen.
  */
 export default function HomePage() {
   return (
@@ -42,6 +45,8 @@ export default function HomePage() {
         </h2>
         <ProjectsTable />
       </section>
+
+      <ComponentShowcase exclude={["ThemeToggle", "BarChart"]} />
     </>
   );
 }

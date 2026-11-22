@@ -7,7 +7,7 @@ The canary for the Graftwork design system, created from [`app-template`](https:
 - **Next.js** (App Router) with strict TypeScript.
 - **Components:** `@graftwork/ui`, with its stylesheet and Geist, imported in `app/globals.css`.
 - **Theme toggle:** in the header. Light, dark and high contrast follow the operating system until the user chooses.
-- **Sample page:** `app/page.tsx`, which uses every component.
+- **Sample page:** `app/(site)/page.tsx`, which uses every component. Its `ComponentShowcase` comes from `@graftwork/ui/showcase`, so new components appear when the package updates.
 - **Checks on every pull request:** lint (including `jsx-a11y` and the design-system rules), build, type-check, Playwright journeys with axe, and visual snapshots at 320, 768 and 1280px in every theme.
 - **Renovate:** extends the shared preset from the design system. Design-system releases arrive as one pull request, and minor and patch updates merge themselves when checks pass. On that pull request, a workflow refreshes the visual snapshots, because design-system visual changes are reviewed in the design-system repo. The refreshed images are attached to the run for anyone who wants to look.
 - **`CLAUDE.md`:** the rules for building with the design system.
