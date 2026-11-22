@@ -11,7 +11,7 @@ This app is built on the Graftwork design system. These rules apply to every cha
 
 ## Figma
 
-Map Figma components to code by matching names. A Figma component called `Button` with `variant=secondary` and `size=sm` is `<Button variant="secondary" size="sm">`. Property names and values match exactly:
+Map Figma components to code by matching names. A Figma component called `Button` with `variant=secondary` and `size=sm` is `<Button variant="secondary" size="sm">`. Property names and values match, with the differences listed below the table:
 
 | Figma component | Code |
 | --- | --- |
@@ -22,6 +22,46 @@ Map Figma components to code by matching names. A Figma component called `Button
 | Table | `density`: comfortable, compact |
 | BarChart | `view`: chart, table |
 | ThemeToggle | `value`: system, light, dark, high-contrast |
+| Accordion | `allowsMultipleExpanded` · AccordionItem `isExpanded`, `isDisabled`, `title`, `content` |
+| Alert | `variant`: info, success, warning, error · `title`, `children`, `action` |
+| AlertDialog | `size`: sm, md, lg · `AlertDialogTitle`, `AlertDialogDescription` |
+| Avatar | `size`: sm, md, lg · `initials` · AvatarGroup `more` |
+| Badge | `variant`: neutral, info, success, warning, error, outline · `children` |
+| Breadcrumb | BreadcrumbItem `isCurrent`, `children` |
+| Checkbox | `isSelected`, `isIndeterminate`, `isInvalid`, `isDisabled`, `label` · CheckboxGroup `label`, `description`, `errorMessage`, `isRequired`, `isInvalid`, `isDisabled` |
+| Collapsible | `isExpanded`, `isDisabled`, `trigger`, `content` |
+| Combobox | same as Input · ComboboxItem `label`, `isSelected`, `isDisabled` |
+| Dialog | `size`: sm, md, lg · `showCloseButton`, `DialogTitle`, `DialogDescription` |
+| DropdownMenu | `selectionMode`: none, single · DropdownMenuItem `variant`: default, destructive, `isSelected`, `isDisabled`, `label`, `shortcut`, `showShortcut`, `hasSubmenu` |
+| Empty | `title`, `description`, `icon`, `action` |
+| InputGroup | same as Input, plus `startAddon`, `startAddonText`, `endAddon`, `endAddonText` |
+| Kbd | `children` |
+| Label | `children` |
+| Pagination | a fixed example; `page` and `pageCount` are set in code |
+| Popover | `placement`: bottom, top · `PopoverTitle`, `PopoverText` |
+| Progress | `isIndeterminate`, `label`, `value`, `showValue` |
+| RadioGroup | `orientation`: vertical, horizontal · `label`, `description`, `errorMessage`, `isRequired`, `isInvalid`, `isDisabled` · Radio `isSelected`, `isDisabled`, `label` |
+| Separator | `orientation`: horizontal, vertical |
+| Sheet | `side`: right, left, top, bottom · `showCloseButton`, `SheetTitle`, `SheetDescription` |
+| Skeleton | resize it to the shape you need |
+| Slider | `isDisabled`, `label`, `description`, `value`, `showValue` |
+| Spinner | `size`: sm, md, lg |
+| Switch | `isSelected`, `isDisabled`, `label` |
+| Tabs | `orientation`: horizontal, vertical · `TabPanel` · Tab `orientation`, `isSelected`, `isDisabled`, `label` |
+| Textarea | same as Input |
+| Toast | `variant`: info, success, warning, error · `title`, `description`, `showDescription` |
+| Toggle | `variant`: ghost, secondary · `size`: sm, md, lg · `isSelected`, `isDisabled`, `children` |
+| Tooltip | `children` |
+
+Where Figma and code differ:
+
+- **Labels:** `label` on Checkbox, Radio and Switch is `children` in code. On Toggle, Badge, Kbd, Label and Tooltip, `children` is the text.
+- **Layers, not props:** `DialogTitle`, `SheetTitle`, `PopoverTitle`, `TabPanel` and similar are the matching code components. Accordion's `title` and `content` are AccordionTrigger and AccordionContent. Collapsible's `trigger` and `content` are CollapsibleTrigger and CollapsibleContent.
+- **Slots:** Figma can't take a component as a property. `startAddon`, `endAddon`, `action`, `icon` and `showShortcut` show or hide a slot, and `startAddonText` and `endAddonText` hold its text. In code, pass the content itself (`shortcut`, `startAddon`, `action`).
+- **Avatar:** `initials` come from `name` in code. Add a photo in Figma as an image fill; in code it's `src`.
+- **Breadcrumb:** `isCurrent` means the item has no `href` in code.
+- **Toast:** pass `title`, `description` and `variant` to `toast()`, with one `<Toaster />` in the app.
+- **Code only:** Slider's two-thumb range and Tooltip's `placement`.
 
 Use Figma variables by their token names. A fill bound to `text/secondary` is `text-text-secondary`.
 
