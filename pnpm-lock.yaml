@@ -176,8 +176,8 @@ importers:
   .:
     dependencies:
       '@graftwork/ui':
-        specifier: 2.0.0
-        version: 2.0.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)
+        specifier: 2.0.1
+        version: 2.0.1(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)
       lucide-react:
         specifier: 1.76.0
         version: 1.76.0(@types/react@19.3.0)(react@19.3.1)
@@ -366,11 +366,11 @@ packages:
   '@fontsource-variable/geist@5.3.0':
     resolution: {integrity: sha512-j0m+vLQuG5XAYoHtGCVu0spvlGreR3EzpECUVzkFmI1mTVnAO38l/NEPDCFgZ177JxzYJCLSmTQibIiYPilGrA==}
 
-  '@graftwork/tokens@2.0.0':
-    resolution: {integrity: sha512-sE1OUfBCGcDtYjrGw0c9Zh6+iC24/g3gh4aPNhujeKLMNJo8glwVqBAH9WL/nucNp90M2pCvQxx6eqPBm/SqBg==}
+  '@graftwork/tokens@2.0.1':
+    resolution: {integrity: sha512-jJ44l5KcWwzChh+OcBGyV60lzGLCdm8R7AmNJ70akK6PQMX7PCnsiBxunW1bVS57y7y7TzlcxG9DE7d7nnkMMw==}
 
-  '@graftwork/ui@2.0.0':
-    resolution: {integrity: sha512-T2IC5WNb4fci9FZ++316HvI43ctHdRHWCt/wMup7hdfHyU1GLCQcLh76HROoS69Xd8H2HSPSBMgNe+pRwOuP1A==}
+  '@graftwork/ui@2.0.1':
+    resolution: {integrity: sha512-YX031rNWEomXOW1DoOlvnx3W0TL0B5AH9VyGdFnYH8GguuYSFyqshh3lrF2IwspWH2CrYApFyUfEhZZMorcE8Q==}
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
@@ -2309,12 +2309,12 @@ snapshots:
 
   '@fontsource-variable/geist@5.3.0': {}
 
-  '@graftwork/tokens@2.0.0': {}
+  '@graftwork/tokens@2.0.1': {}
 
-  '@graftwork/ui@2.0.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)':
+  '@graftwork/ui@2.0.1(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(redux@5.0.1)':
     dependencies:
       '@fontsource-variable/geist': 5.3.0
-      '@graftwork/tokens': 2.0.0
+      '@graftwork/tokens': 2.0.1
       class-variance-authority: 0.7.1
       cn: 0.5.2
       lucide-react: 1.74.0(@types/react@19.3.0)(react@19.3.1)
