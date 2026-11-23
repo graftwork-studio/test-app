@@ -26,6 +26,15 @@ test("the design-system stylesheet and Geist are loaded", async ({ page }) => {
   expect(styles.buttonRadius).toBe("10px");
 });
 
+// The showcase comes from @graftwork/ui, so new components appear here on update.
+test("the sample page shows the component showcase", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 2, name: "All components" })).toBeVisible();
+  expect(await page.locator("[data-component]").count()).toBeGreaterThanOrEqual(35);
+  await expect(page.locator('[data-component="Accordion"]')).toBeVisible();
+  await expect(page.locator('[data-component="Tooltip"]')).toBeVisible();
+});
+
 for (const theme of THEMES) {
   test(`home page has no axe violations in ${theme.name}`, async ({ page }) => {
     await openInTheme(page, "/", theme);
@@ -53,7 +62,7 @@ test("creating a project: errors are shown as text and linked to their fields", 
   await page.getByRole("button", { name: "Create project" }).focus();
   await page.keyboard.press("Enter");
 
-  await expect(page.getByRole("status")).toHaveText("Created “Atlas”.");
+  await expect(page.getByRole("status").filter({ hasText: "Created" })).toHaveText("Created “Atlas”.");
 });
 
 test("theme toggle overrides the system theme and is remembered", async ({ page }) => {
