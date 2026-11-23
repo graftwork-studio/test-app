@@ -52,6 +52,26 @@ Map Figma components to code by matching names. A Figma component called `Button
 | Toast | `variant`: info, success, warning, error · `title`, `description`, `showDescription` |
 | Toggle | `variant`: ghost, secondary · `size`: sm, md, lg · `isSelected`, `isDisabled`, `children` |
 | Tooltip | `children` |
+| Field | `orientation`: vertical, horizontal, responsive · `isInvalid` · `label`, `description`, `showDescription` · FieldSet `legend` |
+| ToggleGroup | `variant`: ghost, secondary · `size`: sm, md, lg · `spacing`: 0, 1, 2 · `item1`, `item2`, `item3` |
+| ButtonGroup | `orientation`: horizontal, vertical · `style`: buttons, text-and-separator |
+| NativeSelect | `size`: sm, md · `isInvalid`, `isDisabled` · `label`, `description`, `showDescription` |
+| ScrollArea | no Figma properties; `aria-label` and `children` are set in code |
+| Item | `variant`: default, outline, muted · `size`: md, sm, xs · `title`, `description`, `showMedia`, `showDescription`, `showActions` |
+| Sidebar | `side`: left, right · `variant`: sidebar, floating, inset · `state`: expanded, collapsed · SidebarMenuButton `size`: sm, md, lg, `variant`: default, outline, `isActive`, `label`, `showLabel`, `icon` |
+| Command | `state`: results, empty · `placeholder` · CommandItem `isFocused`, `isDisabled`, `label`, `shortcut`, `showShortcut`, `icon` |
+| Message | `align`: start, end · `sender`, `time`, `showAvatar`, `showHeader`, `showFooter` |
+| MessageScroller | `direction`: end, start · `showButton` |
+| Bubble | `variant`: default, secondary, muted, tinted, outline, ghost, destructive · `align`: start, end · `text`, `showReactions` |
+| Attachment | `state`: idle, uploading, processing, error, done · `size`: md, sm, xs · `orientation`: horizontal, vertical · `title`, `showDescription` |
+| Marker | `variant`: default, separator, border · `text` |
+| Questionnaire | `type`: single, multiple, text · `hasError` · `title`, `progress`, `description`, `showDescription`, `showPrevious` · QuestionnaireChoice `type`: radio, checkbox, `isSelected`, `isInvalid`, `label`, `description`, `showDescription` |
+| Trace | TraceLine `status`: default, running, error, pending, `title`, `description`, `showDescription` · TraceCollapsible `isExpanded`, `title` |
+| Calendar | `numberOfMonths`: 1, 2 · RangeCalendar `numberOfMonths`: 1, 2 · CalendarDay `state`: default, today, selected, rangeStart, rangeMiddle, rangeEnd, outside, unavailable, disabled, `day` |
+| DatePicker | `state`: default, open, invalid, disabled · `label`, `description`, `showDescription`, `value` · DateRangePicker has the same properties |
+| DataTable | `density`: comfortable, compact · `selectionMode`: none, multiple · `showFilter`, `showColumnToggle`, `showPagination` |
+| ContextMenu | `isOpen`, `triggerText` · items use DropdownMenuItem: `variant`: default, destructive, `shortcut`, `isDisabled` |
+| CodeBlock | `variant`: default, destructive · `size`: md, sm · `title`, `footer`, `showHeader`, `showFooter` · CodeBlockLine `variant`: default, added, removed, highlighted, `size`, `code`, `lineNumber`, `showLineNumber` |
 
 Where Figma and code differ:
 
@@ -62,6 +82,11 @@ Where Figma and code differ:
 - **Breadcrumb:** `isCurrent` means the item has no `href` in code.
 - **Toast:** pass `title`, `description` and `variant` to `toast()`, with one `<Toaster />` in the app.
 - **Code only:** Slider's two-thumb range and Tooltip's `placement`.
+- **Set in code:** ToggleGroup's vertical `orientation` and `selectionMode`, Sidebar's `collapsible` behaviour (Figma shows `state`: expanded, collapsed) and CommandDialog, which is Command inside a modal.
+- **Figma helpers:** SidebarMenuButton, CommandItem, QuestionnaireChoice, TraceLine, TraceCollapsible, CalendarDay and CodeBlockLine are their own Figma components so rows can be reused.
+- **Figma states:** DatePicker and DateRangePicker use `state`: default, open, invalid, disabled. Command uses `state`, Questionnaire uses `hasError`, and ContextMenu uses `isOpen`. In code these come from props, validation and user interaction.
+- **Example content:** `show…` properties hide a part of the design; in code, leave that part out. ButtonGroup's `style` picks an example layout, and text such as `item1`, `sender`, `time` and `value` is the content you pass in code.
+- **Code only:** DataTable's filtering, sorting and paging, and CodeBlock's syntax highlighting, wrapping and `startLine`.
 
 Use Figma variables by their token names. A fill bound to `text/secondary` is `text-text-secondary`.
 
@@ -78,5 +103,7 @@ The components already meet the standard. Keep it that way:
 ## Checks
 
 Every pull request runs lint, build, type-check, Playwright journeys with axe, and visual snapshots at 320, 768 and 1280px in light, dark and high contrast. When a change alters how a screen looks, add the `update-snapshots` label to the pull request, download the `visual-snapshots` artifact, check the images and commit them to `tests/__screenshots__`.
+
+The snapshot workflow only runs when the label is added. If you push a change that affects the images, remove the label and add it again.
 
 Design-system updates are the exception. On Renovate's design-system pull request, a workflow refreshes the snapshots and commits them, because those visual changes are reviewed in the design-system repo. Every other check still has to pass.
