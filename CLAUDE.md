@@ -72,6 +72,16 @@ Map Figma components to code by matching names. A Figma component called `Button
 | DataTable | `density`: comfortable, compact · `selectionMode`: none, multiple · `showFilter`, `showColumnToggle`, `showPagination` |
 | ContextMenu | `isOpen`, `triggerText` · items use DropdownMenuItem: `variant`: default, destructive, `shortcut`, `isDisabled` |
 | CodeBlock | `variant`: default, destructive · `size`: md, sm · `title`, `footer`, `showHeader`, `showFooter` · CodeBlockLine `variant`: default, added, removed, highlighted, `size`, `code`, `lineNumber`, `showLineNumber` |
+| AspectRatio | `ratio`: 1:1, 4:3, 16:9, 21:9 |
+| Carousel | `orientation`: horizontal, vertical · `position`: first, middle, last |
+| DirectionProvider | `direction`: ltr, rtl |
+| Drawer | `side`: bottom, top, left, right · `title`, `description`, `showDescription`, `showCloseButton` |
+| HoverCard | `isOpen`, `trigger` |
+| InputOTP | `state`: default, focused, complete, invalid, disabled · `label`, `description`, `showDescription` · InputOTPSlot `state`: empty, active, filled, invalid, `char` |
+| Menubar | `isOpen` · items use DropdownMenuItem: `variant`: default, destructive, `shortcut`, `isDisabled` |
+| NavigationMenu | `isOpen`, `trigger` |
+| Resizable | `orientation`: horizontal, vertical · `withHandle` |
+| Typography | `variant`: default, chat, docs |
 
 Where Figma and code differ:
 
@@ -86,6 +96,7 @@ Where Figma and code differ:
 - **Figma helpers:** SidebarMenuButton, CommandItem, QuestionnaireChoice, TraceLine, TraceCollapsible, CalendarDay and CodeBlockLine are their own Figma components so rows can be reused.
 - **Figma states:** DatePicker and DateRangePicker use `state`: default, open, invalid, disabled. Command uses `state`, Questionnaire uses `hasError`, and ContextMenu uses `isOpen`. In code these come from props, validation and user interaction.
 - **Example content:** `show…` properties hide a part of the design; in code, leave that part out. ButtonGroup's `style` picks an example layout, and text such as `item1`, `sender`, `time` and `value` is the content you pass in code.
+- **Newest components:** Figma's Direction is `DirectionProvider` in code. Carousel's `position`, InputOTP's `state` and `isOpen` on HoverCard, Menubar and NavigationMenu show states that come from interaction in code. Set `href`, `placement`, `maxLength`, `errorMessage`, `defaultSize`, `minSize`, `locale` and CarouselItem's `aria-label` in code.
 - **Code only:** DataTable's filtering, sorting and paging, and CodeBlock's syntax highlighting, wrapping and `startLine`.
 
 Use Figma variables by their token names. A fill bound to `text/secondary` is `text-text-secondary`.
