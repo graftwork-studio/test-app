@@ -82,7 +82,9 @@ test("theme toggle overrides the system theme and is remembered", async ({ page 
 
 test("chart data is reachable from the keyboard through the table view", async ({ page }) => {
   await page.goto("/");
-  const toggle = page.getByRole("button", { name: "View as table" });
+  // The showcase further down has other charts, each with its own toggle.
+  const chart = page.getByRole("figure", { name: "Sign-ups and upgrades" });
+  const toggle = chart.getByRole("button", { name: "View as table" });
   await toggle.focus();
   await page.keyboard.press("Enter");
   const table = page.getByRole("grid", { name: "Sign-ups and upgrades" });
