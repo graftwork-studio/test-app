@@ -21,6 +21,8 @@ Map Figma components to code by matching names. A Figma component called `Button
 | Card | CardHeader, CardTitle, CardDescription, CardContent, CardFooter |
 | Table | `density`: comfortable, compact |
 | BarChart | `view`: chart, table |
+| LineChart | `view`: chart, table · `curve`: smooth, linear, step · `points`: none, dots, values |
+| AreaChart | `view`: chart, table · `curve`: smooth, linear, step · `stacking`: stacked, percent |
 | ThemeToggle | `value`: system, light, dark, high-contrast |
 | Accordion | `allowsMultipleExpanded` · AccordionItem `isExpanded`, `isDisabled`, `title`, `content` |
 | Alert | `variant`: info, success, warning, error · `title`, `children`, `action` |
