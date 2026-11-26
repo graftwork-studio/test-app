@@ -20,9 +20,12 @@ Map Figma components to code by matching names. A Figma component called `Button
 | Select | same as Input; options are `SelectItem` |
 | Card | CardHeader, CardTitle, CardDescription, CardContent, CardFooter |
 | Table | `density`: comfortable, compact |
-| BarChart | `view`: chart, table |
+| BarChart | `view`: chart, table · `orientation`: vertical, horizontal · `stacking`: none, stacked · `labels`: values, none, inside · `colourBy`: series, category · `negatives`: same, distinct · `highlight` |
 | LineChart | `view`: chart, table · `curve`: smooth, linear, step · `points`: none, dots, values |
 | AreaChart | `view`: chart, table · `curve`: smooth, linear, step · `stacking`: stacked, percent |
+| PieChart | `view`: chart, table · `variant`: pie, donut · `labels`: none, values, names · `rings`: 1, 2 · `totalLabel`, `showTotal`, `highlight` |
+| RadialChart | `view`: chart, table · `shape`: full, half · `labels`: none, names · `rings`: several, single, stacked · `totalLabel`, `showTotal` |
+| RadarChart | `view`: chart, table · `variant`: filled, lines · `points`: none, dots · `grid`: polygon, circle, none |
 | ThemeToggle | `value`: system, light, dark, high-contrast |
 | Accordion | `allowsMultipleExpanded` · AccordionItem `isExpanded`, `isDisabled`, `title`, `content` |
 | Alert | `variant`: info, success, warning, error · `title`, `children`, `action` |
@@ -101,6 +104,7 @@ Where Figma and code differ:
 - **Figma states:** DatePicker and DateRangePicker use `state`: default, open, invalid, disabled. Command uses `state`, Questionnaire uses `hasError`, and ContextMenu uses `isOpen`. In code these come from props, validation and user interaction.
 - **Example content:** `show…` properties hide a part of the design; in code, leave that part out. ButtonGroup's `style` picks an example layout, and text such as `item1`, `sender`, `time` and `value` is the content you pass in code.
 - **Newest components:** Figma's Direction is `DirectionProvider` in code. Carousel's `position`, InputOTP's `state` and `isOpen` on HoverCard, Menubar and NavigationMenu show states that come from interaction in code. Set `href`, `placement`, `maxLength`, `errorMessage`, `defaultSize`, `minSize`, `locale` and CarouselItem's `aria-label` in code.
+- **Charts:** `highlight` is a category value in code; in Figma it's a boolean that highlights an example bar or slice. `showTotal` shows `totalLabel` in the middle; in code, pass `totalLabel`. `rings` exists only in Figma: in code it comes from the number of series and rows. RadialChart's `max` is set in code.
 - **Code only:** DataTable's filtering, sorting and paging, and CodeBlock's syntax highlighting, wrapping and `startLine`.
 
 Use Figma variables by their token names. A fill bound to `text/secondary` is `text-text-secondary`.
