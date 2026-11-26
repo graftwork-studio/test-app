@@ -76,7 +76,7 @@ Map Figma components to code by matching names. A Figma component called `Button
 | Trace | TraceLine `status`: default, running, error, pending, `title`, `description`, `showDescription` · TraceCollapsible `isExpanded`, `title` |
 | Calendar | `numberOfMonths`: 1, 2 · RangeCalendar `numberOfMonths`: 1, 2 · CalendarDay `state`: default, today, selected, rangeStart, rangeMiddle, rangeEnd, outside, unavailable, disabled, `day` |
 | DatePicker | `state`: default, open, invalid, disabled · `label`, `description`, `showDescription`, `value` · DateRangePicker has the same properties |
-| DataTable | `density`: comfortable, compact · `selectionMode`: none, multiple · `showFilter`, `showColumnToggle`, `showPagination` |
+| DataTable | `density`: comfortable, compact · `selectionMode`: none, multiple · `showFilter`, `showColumnToggle`, `showPagination`, `showDragHandle` |
 | ContextMenu | `isOpen`, `triggerText` · items use DropdownMenuItem: `variant`: default, destructive, `shortcut`, `isDisabled` |
 | CodeBlock | `variant`: default, destructive · `size`: md, sm · `title`, `footer`, `showHeader`, `showFooter` · CodeBlockLine `variant`: default, added, removed, highlighted, `size`, `code`, `lineNumber`, `showLineNumber` |
 | AspectRatio | `ratio`: 1:1, 4:3, 16:9, 21:9 |
@@ -106,6 +106,7 @@ Where Figma and code differ:
 - **Newest components:** Figma's Direction is `DirectionProvider` in code. Carousel's `position`, InputOTP's `state` and `isOpen` on HoverCard, Menubar and NavigationMenu show states that come from interaction in code. Set `href`, `placement`, `maxLength`, `errorMessage`, `defaultSize`, `minSize`, `locale` and CarouselItem's `aria-label` in code.
 - **Charts:** `highlight` is a category value in code; in Figma it's a boolean that highlights an example bar or slice. `showTotal` shows `totalLabel` in the middle; in code, pass `totalLabel`. `rings` exists only in Figma: in code it comes from the number of series and rows. RadialChart's `max` is set in code. `icons` in code is an `icon` on each series; in Figma it's a boolean that shows the legend icons, which you swap on the instance. Tooltip options (`tooltipIndicator`, `tooltipLabel`, `tooltipTotal`) and `formatCategory` are code only.
 - **Code only:** DataTable's filtering, sorting and paging, and CodeBlock's syntax highlighting, wrapping and `startLine`.
+- **DataTable reordering:** `showDragHandle` in Figma means passing `onReorder` in code. It's called with every row id in the new order. Columns can't be sorted while it's set.
 
 Use Figma variables by their token names. A fill bound to `text/secondary` is `text-text-secondary`.
 
