@@ -47,6 +47,7 @@ Map Figma components to code by matching names. A Figma component called `Button
 | Pagination | a fixed example; `page` and `pageCount` are set in code |
 | Popover | `placement`: bottom, top · `PopoverTitle`, `PopoverText` |
 | Progress | `isIndeterminate`, `label`, `value`, `showValue` |
+| QrCode | `value` · `size`: sm, md, lg |
 | RadioGroup | `orientation`: vertical, horizontal · `label`, `description`, `errorMessage`, `isRequired`, `isInvalid`, `isDisabled` · Radio `isSelected`, `isDisabled`, `label` |
 | Separator | `orientation`: horizontal, vertical |
 | Sheet | `side`: right, left, top, bottom · `showCloseButton`, `SheetTitle`, `SheetDescription` |
@@ -99,6 +100,7 @@ Where Figma and code differ:
 - **Breadcrumb:** `isCurrent` means the item has no `href` in code.
 - **Toast:** pass `title`, `description` and `variant` to `toast()`, with one `<Toaster />` in the app.
 - **Code only:** Slider's two-thumb range and Tooltip's `placement`.
+- **QrCode:** Figma shows a sample code; in code the modules are drawn from `value`. Its accessible name, `label`, is set in code.
 - **Set in code:** ToggleGroup's vertical `orientation` and `selectionMode`, Sidebar's `collapsible` behaviour (Figma shows `state`: expanded, collapsed) and CommandDialog, which is Command inside a modal.
 - **Figma helpers:** SidebarMenuButton, CommandItem, QuestionnaireChoice, TraceLine, TraceCollapsible, CalendarDay and CodeBlockLine are their own Figma components so rows can be reused.
 - **Figma states:** DatePicker and DateRangePicker use `state`: default, open, invalid, disabled. Command uses `state`, Questionnaire uses `hasError`, and ContextMenu uses `isOpen`. In code these come from props, validation and user interaction.
